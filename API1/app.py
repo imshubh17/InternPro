@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, flash
 from models import db, Contact
 from forms import ContactForm
-from bookmanage import Book,db1
+
 # Flask
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my secret'
@@ -17,16 +17,6 @@ db.init_app(app)
 @app.route("/")
 def index():
     return render_template('web/profile.html')
-
-@app.route("/mybook", methods=('GET', 'POST'))
-def bookmanager():
-
-    if request.form:
-        book = Book(title=request.form.get("title"))
-        db1.session.add(book)
-        db1.session.commit()
-    books = Book.query.all()
-    return render_template('web/bookmanager.html', books=books)
 
 @app.route("/new_contact", methods=('GET', 'POST'))
 def new_contact():
@@ -82,18 +72,6 @@ def contacts():
     '''
     contacts = Contact.query.order_by(Contact.name).all()
     return render_template('web/contacts.html', contacts=contacts)
-
-
-@app.route("/search")
-def search():
-    '''
-    Search
-    '''
-    name_search = request.args.get('name')
-    all_contacts = Contact.query.filter(
-        Contact.name.contains(name_search)
-        ).order_by(Contact.name).all()
-    return render_template('web/contacts.html', contacts=all_contacts)
 
 
 @app.route("/contacts/delete", methods=('POST',))

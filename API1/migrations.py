@@ -20,6 +20,3 @@ for num in range(100):
 
 db.session.commit()
 
-from bookmanage import db1
-db1.create_all()
-exit()

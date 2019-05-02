@@ -1,0 +1,16 @@
+body
+post:json
+
+{
+	"username":"imshubh17",
+	"email":"sss.1771997@gmail.com"
+}
+
+
+get "auth-no aut
+
+
+update 
+put
+
+delete
